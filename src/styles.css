@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+:root { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #292824; background: #f4f3f0; font-synthesis: none; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: not-allowed; opacity: .45; }
+.panel { border: 1px solid rgba(41,40,36,.10); border-radius: 20px; background: rgba(250,249,246,.78); box-shadow: 0 8px 30px rgba(41,40,36,.035); }
+.eyebrow, .section-kicker { color: rgba(41,40,36,.45); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.step-dot { display: grid; height: 30px; width: 30px; place-items: center; border-radius: 50%; background: #292824; color: #f8f7f4; font-size: 12px; }
+.field-label { display: block; font-size: 12px; font-weight: 650; color: rgba(41,40,36,.78); }
+.field-label span { margin-left: 6px; color: rgba(41,40,36,.36); font-size: 10px; font-weight: 500; }
+.field-help { margin-top: 7px; color: rgba(41,40,36,.45); font-size: 11px; line-height: 1.5; }
+.input { width: 100%; border: 1px solid rgba(41,40,36,.14); border-radius: 11px; background: #fffefa; padding: 10px 12px; color: #292824; outline: none; transition: border .2s, box-shadow .2s; }
+.input:focus { border-color: rgba(41,40,36,.55); box-shadow: 0 0 0 3px rgba(41,40,36,.07); }
+.with-icon { padding-left: 38px; }
+.field-icon { position: absolute; left: 13px; top: 12px; color: rgba(41,40,36,.42); }
+.tab { border-bottom: 2px solid transparent; padding: 0 3px 12px; margin-right: 24px; color: rgba(41,40,36,.42); font-size: 12px; }
+.tab.active { border-color: #292824; color: #292824; font-weight: 650; }
+.primary-button, .secondary-button, .quiet-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-size: 12px; font-weight: 650; transition: transform .2s, background .2s; }
+.primary-button { background: #292824; color: #f8f7f4; padding: 11px 14px; }
+.primary-button:hover:not(:disabled) { background: #45433e; transform: translateY(-1px); }
+.secondary-button { border: 1px solid rgba(41,40,36,.12); background: #fffefa; color: rgba(41,40,36,.75); padding: 10px 12px; }
+.secondary-button:hover { background: #f3f1eb; }
+.quiet-button { color: rgba(41,40,36,.55); padding: 6px 0; }
+.quiet-button:hover { color: #292824; }
+.code-preview { max-height: 370px; min-height: 280px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; background: #252421; padding: 18px; color: #e6e0d4; font: 11px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace; }
+::selection { background: #d8e1d3; }

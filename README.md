@@ -1,41 +1,56 @@
 # Ollama Importer
 
-A small local UI and CLI for importing a `.gguf` model into [Ollama](https://ollama.com).
+Import a local GGUF model into [Ollama](https://ollama.com) with a small web UI or CLI.
 
-The app generates an Ollama `Modelfile` and the exact `ollama create` command. Model weights stay on your computer: the browser does not upload files or run shell commands.
+The default import is intentionally minimal:
+
+```text
+FROM /absolute/path/model.gguf
+```
+
+This lets Ollama keep the model's native metadata, renderer, tools, and thinking behavior. The tool does not convert or upload model weights.
+
+## Requirements
+
+- Node.js 20.19 or newer
+- Ollama installed and running for real imports
 
 ## Web UI
 
-Requirements: Node.js 20+ and Ollama.
-
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Open the local Vite URL, enter the absolute `.gguf` path and a model name, review the Modelfile, then copy the command into Terminal.
-
-The form supports Qwen-safe and ChatML templates, system prompts, context size, sampling parameters, stop tokens, and replacing an existing model.
+Enter an absolute `.gguf` path or split pattern such as `/models/model-*.gguf`, choose an Ollama name, review the Modelfile, and copy the generated command into Terminal. The browser never executes commands.
 
 ## CLI
 
 ```bash
-./convert.sh /path/to/model.gguf my-model --preset qwen --keep-modelfile
+./convert.sh /models/model.Q4_K_M.gguf my-model
 ollama run my-model
 ```
 
-Use `./convert.sh --help` for all options. Add `--dry-run` to inspect the generated Modelfile without calling Ollama. Add `--replace` only when you intend to remove and recreate an existing model.
-
-## Troubleshooting
-
-For `System message must be at the beginning`, recreate the model with `--preset qwen --replace`. The preset overrides the GGUF's embedded template with an Ollama-native message template.
-
-## Build
+Useful options:
 
 ```bash
+./convert.sh --help
+./convert.sh /models/model-*.gguf my-model --dry-run
+./convert.sh /models/model.gguf my-model --parameter temperature=0.7
+./convert.sh /models/model.gguf my-model --modelfile ./Modelfile
+```
+
+Parameters, system prompts, and templates are omitted unless explicitly supplied. `--replace` is a project convenience that removes an existing model before creating its replacement; the web UI does not offer destructive replacement.
+
+Use `--preset legacy-qwen-chatml` only for older or mismatched Qwen metadata. A custom template can disable model-specific Ollama capabilities, so native mode is recommended.
+
+## Development
+
+```bash
+npm run lint
+npm run typecheck
+npm test
 npm run build
 ```
 
-## License
-
-MIT. See [LICENSE](LICENSE).
+All model files remain local. See [LICENSE](LICENSE).
